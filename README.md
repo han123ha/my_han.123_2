@@ -1,12 +1,12 @@
 # 英语学习
 一款英语学习资料，覆盖1~6年级的必背（单词，句子）。
 ## 必背单词
-- 1年级 [点击进入学习](https://han123ha.github.io/my_han.123_2/新建文本文档 (2))
-- 2年级 [点击进入学习]()
-- 3年级 [点击进入学习]()
-- 4年级 [点击进入学习]()
-- 5年级 [点击进入学习]()
-- 6年级 [点击进入学习]()
+- 1年级 [点击进入学习](https://han123ha.github.io/my_han.123_2/1年级单词.html)
+- 2年级 [点击进入学习](https://han123ha.github.io/my_han.123_2/2年级单词.html)
+- 3年级 [点击进入学习](https://han123ha.github.io/my_han.123_2/3年级单词.html)
+- 4年级 [点击进入学习](https://han123ha.github.io/my_han.123_2/4年级单词.html)
+- 5年级 [点击进入学习](https://han123ha.github.io/my_han.123_2/5年级单词.html)
+- 6年级 [点击进入学习](https://han123ha.github.io/my_han.123_2/6年级单词.html)
 ## 必背句子
 - 1年级 [点击进入学习]()
 - 2年级 [点击进入学习]()
