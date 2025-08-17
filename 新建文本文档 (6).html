@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>五年级英语必背单词</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#EC4899',
+                        secondary: '#F43F5E',
+                        light: '#F3F4F6',
+                        dark: '#1F2937'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .word-card {
+                @apply bg-white rounded-lg shadow-md p-4 transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+            }
+            .section-title {
+                @apply text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-primary mb-6 text-center;
+            }
+            .word-text {
+                @apply font-semibold text-lg text-dark;
+            }
+            .translation-text {
+                @apply text-gray-600 mt-1;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <header class="bg-gradient-to-r from-primary to-secondary text-white py-8 shadow-lg">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-[clamp(1.8rem,4vw,3rem)] font-bold mb-2">五年级英语必背单词</h1>
+            <p class="text-lg opacity-90">单词列表及其中文翻译</p>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-10">
+        <div class="flex justify-center mb-8">
+            <div class="bg-white p-3 rounded-full shadow-md">
+                <i class="fa fa-book text-primary text-3xl"></i>
+            </div>
+        </div>
+        
+        <h2 class="section-title">单词列表</h2>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <!-- 单词卡片 -->
+            <div class="word-card">
+                <div class="word-text">speak</div>
+                <div class="translation-text">说；讲</div>
+            </div>
+            <div class="word-card">
+                <div class="word-text">English</div>
+                <div class="translation-text">英语</div>
+            </div>
+            <div class="word-card">
+                <div class="word-text">old</div>
+                <div class="translation-text">年老的</div>
+            </div>
+            <div class="word-card">
+                <div class="word-text">young</div>
+                <div class="translation-text">年轻的</div>
+            </div>
+            <div class="word-card">
+                <div class="word-text">funny</div>
+                <div class="translation-text">滑稽的；可笑的</div>
+            </div>
+            <div class="word-card">
+                <div class="word-text">kind</div>
+                <div class="translation-text">体贴的；慈祥的</div>
+            </div>
+            <div class="word-card">
+                <div class="word-text">strict</div>
+                <div class="translation-text">要求严格的；严厉的</div>
+            </div>
+            <div class="word-card">
+                <div class="word-text">polite</div>
+                <div class="translation-text">有礼貌的</div>
+            </div>
+            <div class="word-card">
+                <div class="word-text">hard-working</div>
+                <div class="translation-text">工作努力的；辛勤的</div>
+            </div>
+            <div class="word-card">
+                <div class="word-text">helpful</div>
+                <div class="translation-text">有用的；愿意帮忙的</div>
+            </div>
+            <div class="word-card">
+                <div class="word-text">shy</div>
+                <div class="translation-text">害羞的；腼腆的</div>
+            </div>
+            <div class="word-card">
+                <div class="word-text">know</div>
+                <div class="translation-text">知道；了解</div>
+            </div>
+            <div class="word-card">
+                <div class="word-text">our</div>
+                <div class="translation-text">我们的</div>
+            </div>
+            <div class="word-card">
+                <div class="word-text">Ms.</div>
+                <div class="translation-text">女士</div>
+            </div>
+            <div class="word-card">
+                <div class="word-text">will</div>
+                <div class="translation-text">将要</div>
+            </div>
+            <div class="word-card">
+                <div class="word-text">sometimes</div>
+                <div class="translation-text">有时；间或</div>
+            </div>
+            <div class="word-card">
+                <div class="word-text">robot</div>
+                <div class="translation-text">机器人</div>
+            </div>
+            <div class="word-card">
+                <div class="word-text">him</div>
+                <div class="translation-text">他（宾格）</div>
+            </div>
+            <div class="word-card">
+                <div class="word-text">finish</div>
+                <div class="translation-text">完成；结束</div>
+            </div>
+            <div class="word-card">
+                <div class="word-text">Monday</div>
+                <div class="translation-text">星期一</div>
+            </div>
+            <div class="word-card">
+                <div class="word-text">Tuesday</div>
+                <div class="translation-text">星期二</div>
+            </div>
+            <div class="word-card">
+                <div class="word-text">Wednesday</div>
+                <div class="translation-text">星期三</div>
+            </div>
+            <div class="word-card">
+                <div class="word-text">Thursday</div>
+                <div class="translation-text">星期四</div>
+            </div>
+            <div class="word-card">
+                <div class="word-text">Friday</div>
+                <div class="translation-text">星期五</div>
+            </div>
+            <div class="word-card">
+                <div class="word-text">Saturday</div>
+                <div class="translation-text">星期六</div>
+            </div>
+            <div class="word-card">
+                <div class="word-text">Sunday</div>
+                <div class="translation-text">星期日</div>
+            </div>
+            <div class="word-card">
+                <div class="word-text">weekend</div>
+                <div class="translation-text">周末</div>
+            </div>
+            <div class="word-card">
+                <div class="word-text">wash</div>
+                <div class="translation-text">洗</div>
+            </div>
+            <div class="word-card">
+                <div class="word-text">wash my clothes</div>
+                <div class="translation-text">洗我的衣服</div>
+            </div>
+            <div class="word-card">
+                <div class="word-text">watch TV</div>
+                <div class="translation-text">看电视</div>
+            </div>
+            <div class="word-card">
+                <div class="word-text">do homework</div>
+                <div class="translation-text">做作业</div>
+            </div>
+            <div class="word-card">
+                <div class="word-text">read books</div>
+                <div class="translation-text">读书</div>
+            </div>
+            <div class="word-card">
+                <div class="word-text">play football</div>
+                <div class="translation-text">踢足球</div>
+            </div>
+            <div class="word-card">
+                <div class="word-text">cook</div>
+                <div class="translation-text">烹饪；烹调</div>
+            </div>
+            <div class="word-card">
+                <div class="word-text">park</div>
+                <div class="translation-text">公园</div>
+            </div>
+            <div class="word-card">
+                <div class="word-text">lake</div>
+                <div class="translation-text">湖；湖泊</div>
+            </div>
+            <div class="word-card">
+                <div class="word-text">forest</div>
+                <div class="translation-text">森林</div>
+            </div>
+            <div class="word-card">
+                <div class="word-text">river</div>
+                <div class="translation-text">河；江</div>
+            </div>
+            <div class="word-card">
+                <div class="word-text">mountain</div>
+                <div class="translation-text">高山；山岳</div>
+            </div>
+            <div class="word-card">
+                <div class="word-text">hill</div>
+                <div class="translation-text">山丘；小山</div>
+            </div>
+            <div class="word-card">
+                <div class="word-text">tree</div>
+                <div class="translation-text">树；树木；乔木</div>
+            </div>
+            <div class="word-card">
+                <div class="word-text">bridge</div>
+                <div class="translation-text">桥</div>
+            </div>
+            <div class="word-card">
+                <div class="word-text">building</div>
+                <div class="translation-text">建筑物；房子；楼房</div>
+            </div>
+            <div class="word-card">
+                <div class="word-text">village</div>
+                <div class="translation-text">村庄；村镇</div>
+            </div>
+            <div class="word-card">
+                <div class="word-text">house</div>
+                <div class="translation-text">房屋；房子；住宅</div>
+            </div>
+            <div class="word-card">
+                <div class="word-text">nature</div>
+                <div class="translation-text">自然</div>
+            </div>
+            <div class="word-card">
+                <div class="word-text">photo</div>
+                <div class="translation-text">照片</div>
+            </div>
+            <div class="word-card">
+                <div class="word-text">plant</div>
+                <div class="translation-text">植物</div>
+            </div>
+            <div class="word-card">
+                <div class="word-text">between</div>
+                <div class="translation-text">在…… 中间</div>
+            </div>
+            <div class="word-card">
+                <div class="word-text">front</div>
+                <div class="translation-text">正面</div>
+            </div>
+            <div class="word-card">
+                <div class="word-text">in front of</div>
+                <div class="translation-text">在…… 前面</div>
+            </div>
+            <div class="word-card">
+                <div class="word-text">beside</div>
+                <div class="translation-text">在…… 旁边（附近）</div>
+            </div>
+            <div class="word-card">
+                <div class="word-text">behind</div>
+                <div class="translation-text">在…… 后面</div>
+            </div>
+            <div class="word-card">
+                <div class="word-text">there</div>
+                <div class="translation-text">（表示存在或发生）</div>
+            </div>
+            <div class="word-card">
+                <div class="word-text">lot</div>
+                <div class="translation-text">大量；许多</div>
+            </div>
+            <div class="word-card">
+                <div class="word-text">a lot of</div>
+                <div class="translation-text">大量；许多</div>
+            </div>
+            <div class="word-card">
+                <div class="word-text">flower</div>
+                <div class="translation-text">花；花朵</div>
+            </div>
+            <div class="word-card">
+                <div class="word-text">move</div>
+                <div class="translation-text">搬家</div>
+            </div>
+            <div class="word-card">
+                <div class="word-text">dirty</div>
+                <div class="translation-text">肮脏的</div>
+            </div>
+            <div class="word-card">
+                <div class="word-text">every</div>
+                <div class="translation-text">每个；全体</div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-dark text-white py-6 mt-12">
+        <div class="container mx-auto px-4 text-center">
+            <p>五年级英语单词表 &copy; 2025</p>
+            <p class="mt-2 text-sm opacity-70">开发者:han.123工作室</p>
+        </div>
+    </footer>
+
+    <script>
+        // 添加简单的交互效果
+        document.addEventListener('DOMContentLoaded', () => {
+            // 为每个单词卡片添加点击效果
+            const cards = document.querySelectorAll('.word-card');
+            cards.forEach(card => {
+                card.addEventListener('click', () => {
+                    card.classList.toggle('border-2');
+                    card.classList.toggle('border-primary');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
