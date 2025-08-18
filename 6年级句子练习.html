@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>六年级英语基础句型</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#8B5CF6', // 深紫色系，适合六年级学生
+                        secondary: '#A78BFA',
+                        light: '#F5F3FF',
+                    },
+                    fontFamily: {
+                        sans: ['Comic Sans MS', 'Marker Felt', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .sentence-card {
+                @apply bg-white rounded-xl shadow-md p-6 mb-6 transition-all duration-300 hover:shadow-lg transform hover:-translate-y-1 border-2 border-primary/20;
+            }
+            .english-text {
+                @apply text-xl md:text-2xl font-bold text-primary mb-2;
+            }
+            .chinese-text {
+                @apply text-lg md:text-xl text-gray-700;
+            }
+            .pronunciation {
+                @apply text-sm text-gray-500 mt-2 italic;
+            }
+            .practice-btn {
+                @apply w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center mt-3 cursor-pointer hover:bg-secondary transition-colors;
+            }
+            .example-box {
+                @apply bg-light p-4 rounded-lg mt-3 border border-primary/10 text-sm;
+            }
+            .option-btn {
+                @apply px-3 py-1.5 bg-gray-100 rounded hover:bg-primary/10 transition-colors mx-1 my-1 inline-block;
+            }
+            .career-icon {
+                @apply w-6 h-6 inline-block mr-2;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-b from-light to-white min-h-screen">
+    <header class="py-8 bg-primary text-white text-center shadow-md">
+        <div class="container mx-auto px-4">
+            <h1 class="text-3xl md:text-4xl font-bold">六年级英语基础句型</h1>
+            <p class="mt-2 opacity-90">个人信息与家庭相关表达句型</p>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+        <div class="max-w-2xl mx-auto">
+            <!-- 学习提示 -->
+            <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-8 rounded">
+                <div class="flex">
+                    <div class="flex-shrink-0">
+                        <i class="fa fa-star text-yellow-500 text-xl"></i>
+                    </div>
+                    <div class="ml-3">
+                        <p class="text-sm text-yellow-700">
+                            学习关于个人信息（身高、体重、生日、籍贯）和家庭职业的表达，点击重复按钮练习朗读，完成综合对话练习！
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 句型卡片 -->
+            <div class="sentence-card">
+                <div class="english-text">How tall are you? </div>
+                <div class="chinese-text">你有多高？</div>
+                <div class="pronunciation">发音提示：好 托 阿 有</div>
+                <div class="practice-btn" onclick="practiceSentence(this, 'How tall are you?')">
+                    <i class="fa fa-repeat"></i>
+                </div>
+            </div>
+
+            <div class="sentence-card">
+                <div class="english-text">I'm...cm tall. </div>
+                <div class="chinese-text">我…… 厘米高。</div>
+                <div class="pronunciation">发音提示：爱姆...西艾木 托</div>
+                <div class="mt-3">
+                    <div class="text-sm text-gray-600 mb-2">输入你的身高（厘米）：</div>
+                    <div class="flex">
+                        <input type="number" min="120" max="180" placeholder="例如：155" class="border border-gray-300 rounded-l px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary/50 w-28">
+                        <button class="bg-primary text-white px-4 rounded-r" onclick="showHeightSentence()">
+                            生成句子
+                        </button>
+                    </div>
+                    <div id="height-sentence" class="mt-3 text-primary font-medium hidden"></div>
+                </div>
+                <div class="practice-btn" onclick="practiceSentence(this, 'I\'m...cm tall.')">
+                    <i class="fa fa-repeat"></i>
+                </div>
+            </div>
+
+            <div class="sentence-card">
+                <div class="english-text">How heavy are you? </div>
+                <div class="chinese-text">你有多重？</div>
+                <div class="pronunciation">发音提示：好 海维 阿 有</div>
+                <div class="practice-btn" onclick="practiceSentence(this, 'How heavy are you?')">
+                    <i class="fa fa-repeat"></i>
+                </div>
+            </div>
+
+            <div class="sentence-card">
+                <div class="english-text">I'm...kg. </div>
+                <div class="chinese-text">我…… 公斤。</div>
+                <div class="pronunciation">发音提示：爱姆...千克</div>
+                <div class="mt-3">
+                    <div class="text-sm text-gray-600 mb-2">输入你的体重（公斤）：</div>
+                    <div class="flex">
+                        <input type="number" min="20" max="80" placeholder="例如：45" class="border border-gray-300 rounded-l px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary/50 w-28">
+                        <button class="bg-primary text-white px-4 rounded-r" onclick="showWeightSentence()">
+                            生成句子
+                        </button>
+                    </div>
+                    <div id="weight-sentence" class="mt-3 text-primary font-medium hidden"></div>
+                </div>
+                <div class="practice-btn" onclick="practiceSentence(this, 'I\'m...kg.')">
+                    <i class="fa fa-repeat"></i>
+                </div>
+            </div>
+
+            <div class="sentence-card">
+                <div class="english-text">When is your birthday? </div>
+                <div class="chinese-text">你的生日是什么时候？</div>
+                <div class="pronunciation">发音提示：温 伊兹 哟 波尔斯得</div>
+                <div class="practice-btn" onclick="practiceSentence(this, 'When is your birthday?')">
+                    <i class="fa fa-repeat"></i>
+                </div>
+            </div>
+
+            <div class="sentence-card">
+                <div class="english-text">It's in.../on... </div>
+                <div class="chinese-text">它在…… 月 /…… 日。</div>
+                <div class="pronunciation">发音提示：伊茨 因.../昂...</div>
+                <div class="mt-3">
+                    <div class="text-sm text-gray-600 mb-2">选择你的生日月份：</div>
+                    <div class="flex flex-wrap">
+                        <button class="option-btn" onclick="setBirthdayMonth('January', '一月')">January (一月)</button>
+                        <button class="option-btn" onclick="setBirthdayMonth('February', '二月')">February (二月)</button>
+                        <button class="option-btn" onclick="setBirthdayMonth('March', '三月')">March (三月)</button>
+                        <button class="option-btn" onclick="setBirthdayMonth('April', '四月')">April (四月)</button>
+                        <button class="option-btn" onclick="setBirthdayMonth('May', '五月')">May (五月)</button>
+                        <button class="option-btn" onclick="setBirthdayMonth('June', '六月')">June (六月)</button>
+                        <button class="option-btn" onclick="setBirthdayMonth('July', '七月')">July (七月)</button>
+                        <button class="option-btn" onclick="setBirthdayMonth('August', '八月')">August (八月)</button>
+                        <button class="option-btn" onclick="setBirthdayMonth('September', '九月')">September (九月)</button>
+                        <button class="option-btn" onclick="setBirthdayMonth('October', '十月')">October (十月)</button>
+                        <button class="option-btn" onclick="setBirthdayMonth('November', '十一月')">November (十一月)</button>
+                        <button class="option-btn" onclick="setBirthdayMonth('December', '十二月')">December (十二月)</button>
+                    </div>
+                    <div id="birthday-sentence" class="mt-2 text-primary font-medium hidden"></div>
+                </div>
+                <div class="practice-btn" onclick="practiceSentence(this, 'It\'s in.../on...')">
+                    <i class="fa fa-repeat"></i>
+                </div>
+            </div>
+
+            <div class="sentence-card">
+                <div class="english-text">Where are you from? </div>
+                <div class="chinese-text">你从哪里来？</div>
+                <div class="pronunciation">发音提示：歪儿 阿 有 夫容</div>
+                <div class="practice-btn" onclick="practiceSentence(this, 'Where are you from?')">
+                    <i class="fa fa-repeat"></i>
+                </div>
+            </div>
+
+            <div class="sentence-card">
+                <div class="english-text">I'm from... </div>
+                <div class="chinese-text">我来自……</div>
+                <div class="pronunciation">发音提示：爱姆 夫容...</div>
+                <div class="mt-3">
+                    <div class="text-sm text-gray-600 mb-2">选择你来自的城市：</div>
+                    <div class="flex flex-wrap">
+                        <button class="option-btn" onclick="setFrom('Beijing', '北京')">Beijing (北京)</button>
+                        <button class="option-btn" onclick="setFrom('Shanghai', '上海')">Shanghai (上海)</button>
+                        <button class="option-btn" onclick="setFrom('Guangzhou', '广州')">Guangzhou (广州)</button>
+                        <button class="option-btn" onclick="setFrom('Chengdu', '成都')">Chengdu (成都)</button>
+                        <button class="option-btn" onclick="setFrom('Shenzhen', '深圳')">Shenzhen (深圳)</button>
+                        <button class="option-btn" onclick="setFrom('Chongqing', '重庆')">Chongqing (重庆)</button>
+                    </div>
+                    <div id="from-sentence" class="mt-2 text-primary font-medium hidden"></div>
+                </div>
+                <div class="practice-btn" onclick="practiceSentence(this, 'I\'m from...')">
+                    <i class="fa fa-repeat"></i>
+                </div>
+            </div>
+
+            <div class="sentence-card">
+                <div class="english-text">What does your father/mother do? </div>
+                <div class="chinese-text">你的父亲 / 母亲是做什么的？</div>
+                <div class="pronunciation">发音提示：沃茨 达兹 哟 发则/妈则 度</div>
+                <div class="mt-3">
+                    <div class="text-sm text-gray-600 mb-2">选择询问对象：</div>
+                    <div class="flex flex-wrap">
+                        <button class="option-btn" onclick="setParent('father', '父亲')">father (父亲)</button>
+                        <button class="option-btn" onclick="setParent('mother', '母亲')">mother (母亲)</button>
+                    </div>
+                    <div id="parent-question-sentence" class="mt-2 text-primary font-medium hidden"></div>
+                </div>
+                <div class="practice-btn" onclick="practiceSentence(this, 'What does your father/mother do?')">
+                    <i class="fa fa-repeat"></i>
+                </div>
+            </div>
+
+            <div class="sentence-card">
+                <div class="english-text">He/She is a... </div>
+                <div class="chinese-text">他 / 她是一名……</div>
+                <div class="pronunciation">发音提示：嘿/西 伊兹 额...</div>
+                <div class="example-box">
+                    <strong>常见职业：</strong><br>
+                    <i class="fa fa-briefcase career-icon"></i> teacher (教师)<br>
+                    <i class="fa fa-stethoscope career-icon"></i> doctor (医生)<br>
+                    <i class="fa fa-fire career-icon"></i> firefighter (消防员)<br>
+                    <i class="fa fa-cutlery career-icon"></i> cook (厨师)<br>
+                    <i class="fa fa-paint-brush career-icon"></i> artist (艺术家)
+                </div>
+                <div class="mt-3">
+                    <div class="text-sm text-gray-600 mb-2">选择职业：</div>
+                    <div class="flex flex-wrap">
+                        <button class="option-btn" onclick="setCareer('teacher', '教师', 'he')">teacher (教师)</button>
+                        <button class="option-btn" onclick="setCareer('doctor', '医生', 'he')">doctor (医生)</button>
+                        <button class="option-btn" onclick="setCareer('nurse', '护士', 'she')">nurse (护士)</button>
+                        <button class="option-btn" onclick="setCareer('engineer', '工程师', 'he')">engineer (工程师)</button>
+                    </div>
+                    <div id="career-sentence" class="mt-2 text-primary font-medium hidden"></div>
+                </div>
+                <div class="practice-btn" onclick="practiceSentence(this, 'He/She is a...')">
+                    <i class="fa fa-repeat"></i>
+                </div>
+            </div>
+
+            <!-- 综合对话练习 -->
+            <div class="bg-primary/5 rounded-xl p-6 mt-10 border border-primary/20">
+                <h3 class="text-xl font-bold text-primary mb-4">综合对话练习</h3>
+                <p class="mb-4">当你想知道对方来自哪个城市时，你应该说：</p>
+                <div class="space-y-3">
+                    <button class="w-full text-left p-3 border border-gray-200 rounded hover:bg-gray-50" onclick="checkAnswer(this, false)">How tall are you?</button>
+                    <button class="w-full text-left p-3 border border-gray-200 rounded hover:bg-gray-50" onclick="checkAnswer(this, false)">What's your name?</button>
+                    <button class="w-full text-left p-3 border border-gray-200 rounded hover:bg-gray-50" onclick="checkAnswer(this, true)">Where are you from?</button>
+                </div>
+                <div id="answer-result" class="mt-4 hidden"></div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-gray-100 py-6 mt-12">
+        <div class="container mx-auto px-4 text-center text-gray-600">
+            <p>六年级英语基础句型学习卡</p>
+            <p class="text-sm mt-1">掌握日常交流句型，自信表达个人信息！</p>
+        </div>
+    </footer>
+
+    <script>
+        // 练习句子功能
+        function practiceSentence(button, text) {
+            // 按钮动画效果
+            button.classList.add('animate-pulse');
+            setTimeout(() => button.classList.remove('animate-pulse'), 1000);
+            
+            // 提示练习
+            alert(`请大声朗读: ${text}\n读完后可以再读3遍加深记忆哦！`);
+        }
+
+        // 生成身高句子
+        function showHeightSentence() {
+            const input = document.querySelector('input[type="number"]');
+            const height = input.value.trim() || "150";
+            const sentenceElement = document.getElementById('height-sentence');
+            
+            sentenceElement.textContent = `I'm ${height}cm tall. (我${height}厘米高。)`;
+            sentenceElement.classList.remove('hidden');
+        }
+
+        // 生成体重句子
+        function showWeightSentence() {
+            const input = document.querySelector('input[type="number"]:nth-of-type(2)');
+            const weight = input.value.trim() || "40";
+            const sentenceElement = document.getElementById('weight-sentence');
+            
+            sentenceElement.textContent = `I'm ${weight}kg. (我${weight}公斤。)`;
+            sentenceElement.classList.remove('hidden');
+        }
+
+        // 设置生日月份
+        function setBirthdayMonth(month, chinese) {
+            const sentenceElement = document.getElementById('birthday-sentence');
+            sentenceElement.textContent = `It's in ${month}. (它在${chinese}。)`;
+            sentenceElement.classList.remove('hidden');
+        }
+
+        // 设置来自城市
+        function setFrom(city, chinese) {
+            const sentenceElement = document.getElementById('from-sentence');
+            sentenceElement.textContent = `I'm from ${city}. (我来自${chinese}。)`;
+            sentenceElement.classList.remove('hidden');
+        }
+
+        // 设置父母
+        function setParent(parent, chinese) {
+            const sentenceElement = document.getElementById('parent-question-sentence');
+            sentenceElement.textContent = `What does your ${parent} do? (你的${chinese}是做什么的？)`;
+            sentenceElement.classList.remove('hidden');
+        }
+
+        // 设置职业
+        function setCareer(career, chinese, gender) {
+            const sentenceElement = document.getElementById('career-sentence');
+            sentenceElement.textContent = `${gender.charAt(0).toUpperCase() + gender.slice(1)} is a ${career}. (${gender === 'he' ? '他' : '她'}是一名${chinese}。)`;
+            sentenceElement.classList.remove('hidden');
+        }
+
+        // 检查答案
+        function checkAnswer(button, isCorrect) {
+            const resultElement = document.getElementById('answer-result');
+            
+            // 重置所有按钮样式
+            document.querySelectorAll('.space-y-3 button').forEach(btn => {
+                btn.classList.remove('bg-green-100', 'border-green-300', 'text-green-700', 
+                                    'bg-red-100', 'border-red-300', 'text-red-700');
+            });
+            
+            // 显示结果
+            if (isCorrect) {
+                button.classList.add('bg-green-100', 'border-green-300', 'text-green-700');
+                resultElement.innerHTML = '<i class="fa fa-check text-green-500"></i> 完全正确！询问对方来自哪里时就用这个句子。';
+                resultElement.className = 'mt-4 text-green-700';
+            } else {
+                button.classList.add('bg-red-100', 'border-red-300', 'text-red-700');
+                resultElement.innerHTML = '<i class="fa fa-times text-red-500"></i> 再想想，询问对方来自哪里应该怎么说呢？';
+                resultElement.className = 'mt-4 text-red-700';
+            }
+            
+            resultElement.classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>五年级英语基础句型</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6', // 蓝色系，适合五年级学生
+                        secondary: '#60A5FA',
+                        light: '#EFF6FF',
+                    },
+                    fontFamily: {
+                        sans: ['Comic Sans MS', 'Marker Felt', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .sentence-card {
+                @apply bg-white rounded-xl shadow-md p-6 mb-6 transition-all duration-300 hover:shadow-lg transform hover:-translate-y-1 border-2 border-primary/20;
+            }
+            .english-text {
+                @apply text-xl md:text-2xl font-bold text-primary mb-2;
+            }
+            .chinese-text {
+                @apply text-lg md:text-xl text-gray-700;
+            }
+            .pronunciation {
+                @apply text-sm text-gray-500 mt-2 italic;
+            }
+            .practice-btn {
+                @apply w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center mt-3 cursor-pointer hover:bg-secondary transition-colors;
+            }
+            .example-box {
+                @apply bg-light p-4 rounded-lg mt-3 border border-primary/10 text-sm;
+            }
+            .option-btn {
+                @apply px-3 py-1.5 bg-gray-100 rounded hover:bg-primary/10 transition-colors mx-1 my-1 inline-block;
+            }
+            .weather-icon {
+                @apply w-8 h-8 inline-block mr-2;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-b from-light to-white min-h-screen">
+    <header class="py-8 bg-primary text-white text-center shadow-md">
+        <div class="container mx-auto px-4">
+            <h1 class="text-3xl md:text-4xl font-bold">五年级英语基础句型</h1>
+            <p class="mt-2 opacity-90">交通、数量、价格与天气表达句型</p>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+        <div class="max-w-2xl mx-auto">
+            <!-- 学习提示 -->
+            <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-8 rounded">
+                <div class="flex">
+                    <div class="flex-shrink-0">
+                        <i class="fa fa-star text-yellow-500 text-xl"></i>
+                    </div>
+                    <div class="ml-3">
+                        <p class="text-sm text-yellow-700">
+                            学习关于交通方式、数量询问、价格和天气的表达，点击重复按钮练习朗读，尝试完成情景对话练习！
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 句型卡片 -->
+            <div class="sentence-card">
+                <div class="english-text">How do you go to school? </div>
+                <div class="chinese-text">你怎么上学？</div>
+                <div class="pronunciation">发音提示：好 度 有 够 图 斯古</div>
+                <div class="practice-btn" onclick="practiceSentence(this, 'How do you go to school?')">
+                    <i class="fa fa-repeat"></i>
+                </div>
+            </div>
+
+            <div class="sentence-card">
+                <div class="english-text">Usually I go to school on foot. Sometimes I go by bike.</div>
+                <div class="chinese-text">我通常步行上学。有时候骑自行车。</div>
+                <div class="pronunciation">发音提示：由如类 爱 够 图 斯古 昂 福特。萨姆泰木斯 爱 够 拜 拜克。</div>
+                <div class="mt-3">
+                    <div class="text-sm text-gray-600 mb-2">选择你的上学方式：</div>
+                    <div class="flex flex-wrap">
+                        <button class="option-btn" onclick="setTransport('by bus', '坐公交车')">by bus (坐公交车)</button>
+                        <button class="option-btn" onclick="setTransport('by car', '坐小汽车')">by car (坐小汽车)</button>
+                        <button class="option-btn" onclick="setTransport('by subway', '坐地铁')">by subway (坐地铁)</button>
+                    </div>
+                    <div id="transport-sentence" class="mt-2 text-primary font-medium hidden"></div>
+                </div>
+                <div class="practice-btn" onclick="practiceSentence(this, 'Usually I go to school on foot. Sometimes I go by bike.')">
+                    <i class="fa fa-repeat"></i>
+                </div>
+            </div>
+
+            <div class="sentence-card">
+                <div class="english-text">How many...are there in your...? </div>
+                <div class="chinese-text">你…… 里有多少……？</div>
+                <div class="pronunciation">发音提示：好 梅尼...阿 贼尔 因 哟...</div>
+                <div class="mt-3">
+                    <div class="text-sm text-gray-600 mb-2">选择提问内容：</div>
+                    <div class="grid grid-cols-2 gap-2">
+                        <div>
+                            <div class="text-xs text-gray-500 mb-1">物品</div>
+                            <button class="option-btn w-full" onclick="setItem('books', '书')">books (书)</button>
+                            <button class="option-btn w-full" onclick="setItem('pens', '钢笔')">pens (钢笔)</button>
+                            <button class="option-btn w-full" onclick="setItem('toys', '玩具')">toys (玩具)</button>
+                        </div>
+                        <div>
+                            <div class="text-xs text-gray-500 mb-1">地点</div>
+                            <button class="option-btn w-full" onclick="setPlace('bag', '书包')">bag (书包)</button>
+                            <button class="option-btn w-full" onclick="setPlace('room', '房间')">room (房间)</button>
+                            <button class="option-btn w-full" onclick="setPlace('classroom', '教室')">classroom (教室)</button>
+                        </div>
+                    </div>
+                    <div id="how-many-sentence" class="mt-2 text-primary font-medium hidden"></div>
+                </div>
+                <div class="practice-btn" onclick="practiceSentence(this, 'How many...are there in your...?')">
+                    <i class="fa fa-repeat"></i>
+                </div>
+            </div>
+
+            <div class="sentence-card">
+                <div class="english-text">There are... </div>
+                <div class="chinese-text">有……</div>
+                <div class="pronunciation">发音提示：贼尔 阿...</div>
+                <div class="example-box">
+                    <strong>用法示例：</strong><br>
+                    There are three books in my bag. (我的书包里有三本书。)<br>
+                    There are twenty students in our classroom. (我们教室里有20个学生。)
+                </div>
+                <div class="practice-btn" onclick="practiceSentence(this, 'There are...')">
+                    <i class="fa fa-repeat"></i>
+                </div>
+            </div>
+
+            <div class="sentence-card">
+                <div class="english-text">How much is this...? </div>
+                <div class="chinese-text">这个…… 多少钱？</div>
+                <div class="pronunciation">发音提示：好 马奇 伊兹 贼斯...</div>
+                <div class="mt-3">
+                    <div class="text-sm text-gray-600 mb-2">选择物品：</div>
+                    <div class="flex flex-wrap">
+                        <button class="option-btn" onclick="setThing('pen', '钢笔')">pen (钢笔)</button>
+                        <button class="option-btn" onclick="setThing('book', '书')">book (书)</button>
+                        <button class="option-btn" onclick="setThing('bag', '书包')">bag (书包)</button>
+                        <button class="option-btn" onclick="setThing('pencil', '铅笔')">pencil (铅笔)</button>
+                    </div>
+                    <div id="how-much-sentence" class="mt-2 text-primary font-medium hidden"></div>
+                </div>
+                <div class="practice-btn" onclick="practiceSentence(this, 'How much is this...?')">
+                    <i class="fa fa-repeat"></i>
+                </div>
+            </div>
+
+            <div class="sentence-card">
+                <div class="english-text">It's...yuan. </div>
+                <div class="chinese-text">它…… 元。</div>
+                <div class="pronunciation">发音提示：伊茨...元。</div>
+                <div class="mt-3">
+                    <div class="text-sm text-gray-600 mb-2">输入价格：</div>
+                    <div class="flex">
+                        <input type="number" min="1" max="100" placeholder="例如：15" class="border border-gray-300 rounded-l px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary/50 w-24">
+                        <button class="bg-primary text-white px-4 rounded-r" onclick="showPriceSentence()">
+                            生成句子
+                        </button>
+                    </div>
+                    <div id="price-sentence" class="mt-3 text-primary font-medium hidden"></div>
+                </div>
+                <div class="practice-btn" onclick="practiceSentence(this, 'It\'s...yuan.')">
+                    <i class="fa fa-repeat"></i>
+                </div>
+            </div>
+
+            <div class="sentence-card">
+                <div class="english-text">What's the weather like in...? </div>
+                <div class="chinese-text">…… 的天气如何？</div>
+                <div class="pronunciation">发音提示：沃茨 则 歪泽 莱克 因...</div>
+                <div class="mt-3">
+                    <div class="text-sm text-gray-600 mb-2">选择城市：</div>
+                    <div class="flex flex-wrap">
+                        <button class="option-btn" onclick="setCity('Beijing', '北京')">Beijing (北京)</button>
+                        <button class="option-btn" onclick="setCity('Shanghai', '上海')">Shanghai (上海)</button>
+                        <button class="option-btn" onclick="setCity('Guangzhou', '广州')">Guangzhou (广州)</button>
+                        <button class="option-btn" onclick="setCity('Chengdu', '成都')">Chengdu (成都)</button>
+                    </div>
+                    <div id="weather-question-sentence" class="mt-2 text-primary font-medium hidden"></div>
+                </div>
+                <div class="practice-btn" onclick="practiceSentence(this, 'What\'s the weather like in...?')">
+                    <i class="fa fa-repeat"></i>
+                </div>
+            </div>
+
+            <div class="sentence-card">
+                <div class="english-text">It's sunny/rainy/windy... </div>
+                <div class="chinese-text">天气是晴朗的 / 下雨的 / 有风的……</div>
+                <div class="pronunciation">发音提示：伊茨 桑尼/瑞尼/温迪...</div>
+                <div class="example-box">
+                    <strong>更多天气表达：</strong><br>
+                    <i class="fa fa-sun-o weather-icon text-yellow-500"></i> sunny (晴朗的)<br>
+                    <i class="fa fa-tint weather-icon text-blue-500"></i> rainy (下雨的)<br>
+                    <i class="fa fa-leaf weather-icon text-green-500"></i> windy (有风的)<br>
+                    <i class="fa fa-snowflake-o weather-icon text-blue-100"></i> snowy (下雪的)<br>
+                    <i class="fa fa-cloud weather-icon text-gray-400"></i> cloudy (多云的)
+                </div>
+                <div class="practice-btn" onclick="practiceSentence(this, 'It\'s sunny/rainy/windy...')">
+                    <i class="fa fa-repeat"></i>
+                </div>
+            </div>
+
+            <!-- 情景对话练习 -->
+            <div class="bg-primary/5 rounded-xl p-6 mt-10 border border-primary/20">
+                <h3 class="text-xl font-bold text-primary mb-4">情景对话练习</h3>
+                <p class="mb-4">当你在商店里想问一支钢笔多少钱时，你应该说：</p>
+                <div class="space-y-3">
+                    <button class="w-full text-left p-3 border border-gray-200 rounded hover:bg-gray-50" onclick="checkAnswer(this, false)">How many pens are there?</button>
+                    <button class="w-full text-left p-3 border border-gray-200 rounded hover:bg-gray-50" onclick="checkAnswer(this, true)">How much is this pen?</button>
+                    <button class="w-full text-left p-3 border border-gray-200 rounded hover:bg-gray-50" onclick="checkAnswer(this, false)">What's the weather like today?</button>
+                </div>
+                <div id="answer-result" class="mt-4 hidden"></div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-gray-100 py-6 mt-12">
+        <div class="container mx-auto px-4 text-center text-gray-600">
+            <p>五年级英语基础句型学习卡</p>
+            <p class="text-sm mt-1">结合生活场景练习，英语更实用！</p>
+        </div>
+    </footer>
+
+    <script>
+        let selectedItem = "books";
+        let selectedPlace = "bag";
+        
+        // 练习句子功能
+        function practiceSentence(button, text) {
+            // 按钮动画效果
+            button.classList.add('animate-pulse');
+            setTimeout(() => button.classList.remove('animate-pulse'), 1000);
+            
+            // 提示练习
+            alert(`请大声朗读: ${text}\n读完后可以再读3遍加深记忆哦！`);
+        }
+
+        // 设置交通方式
+        function setTransport(transport, chinese) {
+            const sentenceElement = document.getElementById('transport-sentence');
+            sentenceElement.textContent = `Usually I go to school ${transport}. (我通常${chinese}上学。)`;
+            sentenceElement.classList.remove('hidden');
+        }
+
+        // 设置物品
+        function setItem(item, chinese) {
+            selectedItem = item;
+            updateHowManySentence();
+        }
+
+        // 设置地点
+        function setPlace(place, chinese) {
+            selectedPlace = place;
+            updateHowManySentence();
+        }
+
+        // 更新数量问句
+        function updateHowManySentence() {
+            const itemChinese = {
+                'books': '书',
+                'pens': '钢笔',
+                'toys': '玩具'
+            };
+            
+            const placeChinese = {
+                'bag': '书包',
+                'room': '房间',
+                'classroom': '教室'
+            };
+            
+            const sentenceElement = document.getElementById('how-many-sentence');
+            sentenceElement.textContent = `How many ${selectedItem} are there in your ${selectedPlace}? (你的${placeChinese[selectedPlace]}里有多少${itemChinese[selectedItem]}？)`;
+            sentenceElement.classList.remove('hidden');
+        }
+
+        // 设置物品（价格询问）
+        function setThing(thing, chinese) {
+            const sentenceElement = document.getElementById('how-much-sentence');
+            sentenceElement.textContent = `How much is this ${thing}? (这个${chinese}多少钱？)`;
+            sentenceElement.classList.remove('hidden');
+        }
+
+        // 生成价格句子
+        function showPriceSentence() {
+            const input = document.querySelector('input[type="number"]');
+            const price = input.value.trim() || "10";
+            const sentenceElement = document.getElementById('price-sentence');
+            
+            sentenceElement.textContent = `It's ${price} yuan. (它${price}元。)`;
+            sentenceElement.classList.remove('hidden');
+        }
+
+        // 设置城市
+        function setCity(city, chinese) {
+            const sentenceElement = document.getElementById('weather-question-sentence');
+            sentenceElement.textContent = `What's the weather like in ${city}? (${chinese}的天气如何？)`;
+            sentenceElement.classList.remove('hidden');
+        }
+
+        // 检查答案
+        function checkAnswer(button, isCorrect) {
+            const resultElement = document.getElementById('answer-result');
+            
+            // 重置所有按钮样式
+            document.querySelectorAll('.space-y-3 button').forEach(btn => {
+                btn.classList.remove('bg-green-100', 'border-green-300', 'text-green-700', 
+                                    'bg-red-100', 'border-red-300', 'text-red-700');
+            });
+            
+            // 显示结果
+            if (isCorrect) {
+                button.classList.add('bg-green-100', 'border-green-300', 'text-green-700');
+                resultElement.innerHTML = '<i class="fa fa-check text-green-500"></i> 完全正确！询问价格时就用这个句子。';
+                resultElement.className = 'mt-4 text-green-700';
+            } else {
+                button.classList.add('bg-red-100', 'border-red-300', 'text-red-700');
+                resultElement.innerHTML = '<i class="fa fa-times text-red-500"></i> 再想想，询问物品价格应该怎么说呢？';
+                resultElement.className = 'mt-4 text-red-700';
+            }
+            
+            resultElement.classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>

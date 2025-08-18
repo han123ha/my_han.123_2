@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>四年级英语基础句型</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#10B981', // 绿色系，适合四年级学生
+                        secondary: '#34D399',
+                        light: '#F0FDF4',
+                    },
+                    fontFamily: {
+                        sans: ['Comic Sans MS', 'Marker Felt', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .sentence-card {
+                @apply bg-white rounded-xl shadow-md p-6 mb-6 transition-all duration-300 hover:shadow-lg transform hover:-translate-y-1 border-2 border-primary/20;
+            }
+            .english-text {
+                @apply text-xl md:text-2xl font-bold text-primary mb-2;
+            }
+            .chinese-text {
+                @apply text-lg md:text-xl text-gray-700;
+            }
+            .pronunciation {
+                @apply text-sm text-gray-500 mt-2 italic;
+            }
+            .practice-btn {
+                @apply w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center mt-3 cursor-pointer hover:bg-secondary transition-colors;
+            }
+            .example-box {
+                @apply bg-light p-4 rounded-lg mt-3 border border-primary/10 text-sm;
+            }
+            .action-btn {
+                @apply px-3 py-1.5 bg-gray-100 rounded hover:bg-primary/10 transition-colors mx-1 my-1 inline-block;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-b from-light to-white min-h-screen">
+    <header class="py-8 bg-primary text-white text-center shadow-md">
+        <div class="container mx-auto px-4">
+            <h1 class="text-3xl md:text-4xl font-bold">四年级英语基础句型</h1>
+            <p class="mt-2 opacity-90">能力、疑问与饮食表达句型</p>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+        <div class="max-w-2xl mx-auto">
+            <!-- 学习提示 -->
+            <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-8 rounded">
+                <div class="flex">
+                    <div class="flex-shrink-0">
+                        <i class="fa fa-star text-yellow-500 text-xl"></i>
+                    </div>
+                    <div class="ml-3">
+                        <p class="text-sm text-yellow-700">
+                            学习关于能力询问、一般疑问句和饮食表达的句型，点击重复按钮练习朗读，完成互动练习巩固所学！
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 句型卡片 -->
+            <div class="sentence-card">
+                <div class="english-text">Can you...? </div>
+                <div class="chinese-text">你能…… 吗？</div>
+                <div class="pronunciation">发音提示：看 有...</div>
+                <div class="mt-3">
+                    <div class="text-sm text-gray-600 mb-2">选择动作：</div>
+                    <div class="flex flex-wrap">
+                        <button class="action-btn" onclick="setAction('swim', '游泳')">swim (游泳)</button>
+                        <button class="action-btn" onclick="setAction('dance', '跳舞')">dance (跳舞)</button>
+                        <button class="action-btn" onclick="setAction('sing', '唱歌')">sing (唱歌)</button>
+                        <button class="action-btn" onclick="setAction('run', '跑步')">run (跑步)</button>
+                    </div>
+                    <div id="can-you-sentence" class="mt-2 text-primary font-medium hidden"></div>
+                </div>
+                <div class="practice-btn" onclick="practiceSentence(this, 'Can you...?')">
+                    <i class="fa fa-repeat"></i>
+                </div>
+            </div>
+
+            <div class="sentence-card">
+                <div class="english-text">I can... </div>
+                <div class="chinese-text">我能……</div>
+                <div class="pronunciation">发音提示：爱 看...</div>
+                <div class="example-box">
+                    <strong>用法示例：</strong><br>
+                    I can swim. (我能游泳。)<br>
+                    I can ride a bike. (我能骑自行车。)<br>
+                    I can draw. (我能画画。)
+                </div>
+                <div class="practice-btn" onclick="practiceSentence(this, 'I can...')">
+                    <i class="fa fa-repeat"></i>
+                </div>
+            </div>
+
+            <div class="sentence-card">
+                <div class="english-text">Is it...? </div>
+                <div class="chinese-text">它是…… 吗？</div>
+                <div class="pronunciation">发音提示：伊兹 伊特...</div>
+                <div class="mt-3">
+                    <div class="text-sm text-gray-600 mb-2">选择疑问内容：</div>
+                    <div class="flex flex-wrap">
+                        <button class="action-btn" onclick="setItQuestion('a cat', '一只猫')">a cat (一只猫)</button>
+                        <button class="action-btn" onclick="setItQuestion('red', '红色的')">red (红色的)</button>
+                        <button class="action-btn" onclick="setItQuestion('big', '大的')">big (大的)</button>
+                        <button class="action-btn" onclick="setItQuestion('yours', '你的')">yours (你的)</button>
+                    </div>
+                    <div id="is-it-sentence" class="mt-2 text-primary font-medium hidden"></div>
+                </div>
+                <div class="practice-btn" onclick="practiceSentence(this, 'Is it...?')">
+                    <i class="fa fa-repeat"></i>
+                </div>
+            </div>
+
+            <div class="sentence-card">
+                <div class="english-text">Yes, it is. / No, it isn't.</div>
+                <div class="chinese-text">是的，它是。/ 不，它不是。</div>
+                <div class="pronunciation">发音提示：耶斯，伊兹伊特。/ 诺，伊特 伊兹恩特。</div>
+                <div class="example-box">
+                    <strong>用法示例：</strong><br>
+                    - Is it a dog? (它是一只狗吗？)<br>
+                    - Yes, it is. (是的，它是。)<br>
+                    - Is it blue? (它是蓝色的吗？)<br>
+                    - No, it isn't. (不，它不是。)
+                </div>
+                <div class="practice-btn" onclick="practiceSentence(this, 'Yes, it is. / No, it isn\'t.')">
+                    <i class="fa fa-repeat"></i>
+                </div>
+            </div>
+
+            <div class="sentence-card">
+                <div class="english-text">Are they...? </div>
+                <div class="chinese-text">它们是…… 吗？</div>
+                <div class="pronunciation">发音提示：阿 贼...</div>
+                <div class="example-box">
+                    <strong>用法示例：</strong><br>
+                    Are they books? (它们是书吗？)<br>
+                    Are they your friends? (他们是你的朋友吗？)
+                </div>
+                <div class="practice-btn" onclick="practiceSentence(this, 'Are they...?')">
+                    <i class="fa fa-repeat"></i>
+                </div>
+            </div>
+
+            <div class="sentence-card">
+                <div class="english-text">No, they aren't. They're...</div>
+                <div class="chinese-text">不，它们不是。它们是……</div>
+                <div class="pronunciation">发音提示：诺，贼 阿恩特。贼尔...</div>
+                <div class="example-box">
+                    <strong>用法示例：</strong><br>
+                    - Are they apples? (它们是苹果吗？)<br>
+                    - No, they aren't. They're oranges. (不，它们不是。它们是橘子。)
+                </div>
+                <div class="practice-btn" onclick="practiceSentence(this, 'No, they aren\'t. They\'re...')">
+                    <i class="fa fa-repeat"></i>
+                </div>
+            </div>
+
+            <div class="sentence-card">
+                <div class="english-text">What would you like for...? </div>
+                <div class="chinese-text">你…… 想吃什么？</div>
+                <div class="pronunciation">发音提示：沃茨 乌德 有 莱克 佛...</div>
+                <div class="mt-3">
+                    <div class="text-sm text-gray-600 mb-2">选择用餐时间：</div>
+                    <div class="flex flex-wrap">
+                        <button class="action-btn" onclick="setMealTime('breakfast', '早餐')">breakfast (早餐)</button>
+                        <button class="action-btn" onclick="setMealTime('lunch', '午餐')">lunch (午餐)</button>
+                        <button class="action-btn" onclick="setMealTime('dinner', '晚餐')">dinner (晚餐)</button>
+                    </div>
+                    <div id="what-like-sentence" class="mt-2 text-primary font-medium hidden"></div>
+                </div>
+                <div class="practice-btn" onclick="practiceSentence(this, 'What would you like for...?')">
+                    <i class="fa fa-repeat"></i>
+                </div>
+            </div>
+
+            <div class="sentence-card">
+                <div class="english-text">I'd like some... </div>
+                <div class="chinese-text">我想要一些……</div>
+                <div class="pronunciation">发音提示：爱德 莱克 萨姆...</div>
+                <div class="example-box">
+                    <strong>用法示例：</strong><br>
+                    I'd like some rice. (我想要一些米饭。)<br>
+                    I'd like some milk. (我想要一些牛奶。)<br>
+                    I'd like some apples. (我想要一些苹果。)
+                </div>
+                <div class="practice-btn" onclick="practiceSentence(this, 'I\'d like some...')">
+                    <i class="fa fa-repeat"></i>
+                </div>
+            </div>
+
+            <!-- 情景练习 -->
+            <div class="bg-primary/5 rounded-xl p-6 mt-10 border border-primary/20">
+                <h3 class="text-xl font-bold text-primary mb-4">情景练习：选择正确的回答</h3>
+                <p class="mb-4">当别人问你"Can you play football?"时，你应该回答：</p>
+                <div class="space-y-3">
+                    <button class="w-full text-left p-3 border border-gray-200 rounded hover:bg-gray-50" onclick="checkAnswer(this, true)">Yes, I can. / No, I can't.</button>
+                    <button class="w-full text-left p-3 border border-gray-200 rounded hover:bg-gray-50" onclick="checkAnswer(this, false)">Yes, it is. / No, it isn't.</button>
+                    <button class="w-full text-left p-3 border border-gray-200 rounded hover:bg-gray-50" onclick="checkAnswer(this, false)">I'd like some bread.</button>
+                </div>
+                <div id="answer-result" class="mt-4 hidden"></div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-gray-100 py-6 mt-12">
+        <div class="container mx-auto px-4 text-center text-gray-600">
+            <p>四年级英语基础句型学习卡</p>
+            <p class="text-sm mt-1">勤加练习，英语交流更自信！</p>
+        </div>
+    </footer>
+
+    <script>
+        // 练习句子功能
+        function practiceSentence(button, text) {
+            // 按钮动画效果
+            button.classList.add('animate-pulse');
+            setTimeout(() => button.classList.remove('animate-pulse'), 1000);
+            
+            // 提示练习
+            alert(`请大声朗读: ${text}\n读完后可以再读3遍加深记忆哦！`);
+        }
+
+        // 设置动作动词
+        function setAction(action, chinese) {
+            const sentenceElement = document.getElementById('can-you-sentence');
+            sentenceElement.textContent = `Can you ${action}? (你能${chinese}吗？)`;
+            sentenceElement.classList.remove('hidden');
+        }
+
+        // 设置It疑问句内容
+        function setItQuestion(content, chinese) {
+            const sentenceElement = document.getElementById('is-it-sentence');
+            sentenceElement.textContent = `Is it ${content}? (它是${chinese}吗？)`;
+            sentenceElement.classList.remove('hidden');
+        }
+
+        // 设置用餐时间
+        function setMealTime(meal, chinese) {
+            const sentenceElement = document.getElementById('what-like-sentence');
+            sentenceElement.textContent = `What would you like for ${meal}? (你${chinese}想吃什么？)`;
+            sentenceElement.classList.remove('hidden');
+        }
+
+        // 检查答案
+        function checkAnswer(button, isCorrect) {
+            const resultElement = document.getElementById('answer-result');
+            
+            // 重置所有按钮样式
+            document.querySelectorAll('.space-y-3 button').forEach(btn => {
+                btn.classList.remove('bg-green-100', 'border-green-300', 'text-green-700', 
+                                    'bg-red-100', 'border-red-300', 'text-red-700');
+            });
+            
+            // 显示结果
+            if (isCorrect) {
+                button.classList.add('bg-green-100', 'border-green-300', 'text-green-700');
+                resultElement.innerHTML = '<i class="fa fa-check text-green-500"></i> 太棒了，回答正确！对于能力询问就用这种方式回答。';
+                resultElement.className = 'mt-4 text-green-700';
+            } else {
+                button.classList.add('bg-red-100', 'border-red-300', 'text-red-700');
+                resultElement.innerHTML = '<i class="fa fa-times text-red-500"></i> 再思考一下，询问能力时应该如何回答呢？';
+                resultElement.className = 'mt-4 text-red-700';
+            }
+            
+            resultElement.classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
