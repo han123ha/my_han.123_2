@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>五年级英语单词及句子扩展</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#10B981',
+                        secondary: '#34D399',
+                        light: '#F0FDF4',
+                        dark: '#1F2937'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .category-container {
+                @apply bg-white rounded-xl shadow-md p-6 mb-8 transition-all duration-300 hover:shadow-lg transform hover:-translate-y-1;
+            }
+            .category-header {
+                @apply flex items-center mb-6 pb-3 border-b-2 border-primary/20;
+            }
+            .category-icon {
+                @apply w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center mr-3;
+            }
+            .category-title {
+                @apply text-xl font-semibold text-dark;
+            }
+            .word-grid {
+                @apply grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 mb-8;
+            }
+            .word-card {
+                @apply bg-light rounded-lg p-4 transition-all duration-200 hover:bg-primary/10 border-l-4 border-primary cursor-pointer relative overflow-hidden;
+            }
+            .word-card.mastered {
+                @apply bg-primary/20;
+            }
+            .word-card.mastered::after {
+                content: "✓";
+                @apply absolute top-2 right-2 text-primary font-bold;
+            }
+            .word-text {
+                @apply font-medium text-dark;
+            }
+            .translation-text {
+                @apply text-sm text-gray-600 mt-1;
+            }
+            .sentence-section {
+                @apply bg-gray-50 rounded-lg p-5 transition-all duration-300 hover:shadow-inner;
+            }
+            .sentence-title {
+                @apply font-semibold text-primary mb-4;
+            }
+            .sentence-item {
+                @apply mb-3 pb-3 border-b border-gray-100 last:border-0 last:mb-0 last:pb-0;
+            }
+            .sentence-english {
+                @apply font-medium text-dark;
+            }
+            .sentence-chinese {
+                @apply text-sm text-gray-600 mt-1;
+            }
+            .exercise-container {
+                @apply bg-white rounded-xl shadow-md p-6 mt-10;
+            }
+            .exercise-title {
+                @apply text-xl font-bold text-primary mb-6 text-center;
+            }
+            .exercise-type {
+                @apply mb-6;
+            }
+            .exercise-type-title {
+                @apply font-semibold text-dark text-lg mb-4;
+            }
+            .progress-bar {
+                @apply h-2 bg-gray-200 rounded-full overflow-hidden;
+            }
+            .progress-value {
+                @apply h-full bg-primary transition-all duration-500;
+            }
+            .nav-link {
+                @apply px-4 py-2 rounded-full transition-all duration-200 whitespace-nowrap;
+            }
+            .nav-link.active {
+                @apply bg-primary/10 text-primary font-medium;
+            }
+            .nav-link:not(.active) {
+                @apply bg-gray-100 hover:bg-primary/50 hover:text-white;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- 顶部导航 -->
+    <header class="bg-gradient-to-r from-primary to-secondary text-white py-6 shadow-lg">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold mb-2">五年级英语单词及句子扩展</h1>
+            <p class="text-lg opacity-90">单词分类学习与句子扩展练习</p>
+        </div>
+    </header>
+
+    <!-- 分类导航栏 - 滚动时固定 -->
+    <nav id="category-nav" class="sticky top-0 bg-white shadow-md z-10 py-3 transition-all duration-300">
+        <div class="container mx-auto px-4 flex overflow-x-auto gap-2 pb-1 hide-scrollbar">
+            <a href="#character" class="nav-link active">人物特征类</a>
+            <a href="#week" class="nav-link">星期与周末类</a>
+            <a href="#food" class="nav-link">食物与饮料类</a>
+            <a href="#abilities" class="nav-link">能力与活动类</a>
+            <a href="#household" class="nav-link">家居物品类</a>
+            <a href="#seasons" class="nav-link">季节与天气类</a>
+            <a href="#careers" class="nav-link">职业与梦想类</a>
+            <a href="#subjects" class="nav-link">学科类</a>
+            <a href="#exercises" class="nav-link">句子扩展练习</a>
+        </div>
+    </nav>
+
+    <!-- 学习进度 -->
+    <div class="container mx-auto px-4 py-4">
+        <div class="flex justify-between items-center mb-2">
+            <span class="text-sm text-gray-600">学习进度</span>
+            <span id="progress-percentage" class="text-sm font-medium text-primary">0%</span>
+        </div>
+        <div class="progress-bar">
+            <div id="progress-fill" class="progress-value" style="width: 0%"></div>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-4 py-6">
+        <div class="flex justify-center mb-8">
+            <div class="bg-white p-3 rounded-full shadow-md">
+                <i class="fa fa-language text-primary text-3xl"></i>
+            </div>
+        </div>
+        
+        <h2 class="text-[clamp(1.3rem,2.5vw,2rem)] font-bold text-primary mb-8 text-center">一、基础单词</h2>
+        
+        <!-- 人物特征类 -->
+        <div id="character" class="category-container scroll-mt-24">
+            <div class="category-header">
+                <div class="category-icon">
+                    <i class="fa fa-user"></i>
+                </div>
+                <h3 class="category-title">人物特征类</h3>
+            </div>
+            
+            <div class="word-grid">
+                <div class="word-card" data-word="old">
+                    <div class="word-text">old</div>
+                    <div class="translation-text">年老的</div>
+                </div>
+                <div class="word-card" data-word="young">
+                    <div class="word-text">young</div>
+                    <div class="translation-text">年轻的</div>
+                </div>
+                <div class="word-card" data-word="funny">
+                    <div class="word-text">funny</div>
+                    <div class="translation-text">有趣的</div>
+                </div>
+                <div class="word-card" data-word="kind">
+                    <div class="word-text">kind</div>
+                    <div class="translation-text">和蔼的</div>
+                </div>
+                <div class="word-card" data-word="strict">
+                    <div class="word-text">strict</div>
+                    <div class="translation-text">严厉的</div>
+                </div>
+                <div class="word-card" data-word="polite">
+                    <div class="word-text">polite</div>
+                    <div class="translation-text">有礼貌的</div>
+                </div>
+                <div class="word-card" data-word="hard-working">
+                    <div class="word-text">hard-working</div>
+                    <div class="translation-text">勤奋的</div>
+                </div>
+                <div class="word-card" data-word="helpful">
+                    <div class="word-text">helpful</div>
+                    <div class="translation-text">有帮助的</div>
+                </div>
+                <div class="word-card" data-word="clever">
+                    <div class="word-text">clever</div>
+                    <div class="translation-text">聪明的</div>
+                </div>
+                <div class="word-card" data-word="shy">
+                    <div class="word-text">shy</div>
+                    <div class="translation-text">害羞的</div>
+                </div>
+            </div>
+            
+            <div class="sentence-section">
+                <h4 class="sentence-title">句子扩展：</h4>
+                <div class="space-y-4">
+                    <div class="sentence-item">
+                        <div class="sentence-english">My teacher is old but very kind. She always helps us with our homework.</div>
+                        <div class="sentence-chinese">（我的老师年纪大但很和蔼。她总是帮助我们做作业。）</div>
+                    </div>
+                    <div class="sentence-item">
+                        <div class="sentence-english">The young boy is very clever. He can solve difficult math problems easily.</div>
+                        <div class="sentence-chinese">（这个年轻的男孩很聪明。他能轻松解决难题。）</div>
+                    </div>
+                    <div class="sentence-item">
+                        <div class="sentence-english">She is polite and always says "please" and "thank you".</div>
+                        <div class="sentence-chinese">（她很有礼貌，总是说"请"和"谢谢"。）</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 星期与周末类 -->
+        <div id="week" class="category-container scroll-mt-24">
+            <div class="category-header">
+                <div class="category-icon">
+                    <i class="fa fa-calendar"></i>
+                </div>
+                <h3 class="category-title">星期与周末类</h3>
+            </div>
+            
+            <div class="word-grid">
+                <div class="word-card" data-word="Monday">
+                    <div class="word-text">Monday</div>
+                    <div class="translation-text">星期一</div>
+                </div>
+                <div class="word-card" data-word="Tuesday">
+                    <div class="word-text">Tuesday</div>
+                    <div class="translation-text">星期二</div>
+                </div>
+                <div class="word-card" data-word="Wednesday">
+                    <div class="word-text">Wednesday</div>
+                    <div class="translation-text">星期三</div>
+                </div>
+                <div class="word-card" data-word="Thursday">
+                    <div class="word-text">Thursday</div>
+                    <div class="translation-text">星期四</div>
+                </div>
+                <div class="word-card" data-word="Friday">
+                    <div class="word-text">Friday</div>
+                    <div class="translation-text">星期五</div>
+                </div>
+                <div class="word-card" data-word="Saturday">
+                    <div class="word-text">Saturday</div>
+                    <div class="translation-text">星期六</div>
+                </div>
+                <div class="word-card" data-word="Sunday">
+                    <div class="word-text">Sunday</div>
+                    <div class="translation-text">星期日</div>
+                </div>
+                <div class="word-card" data-word="weekend">
+                    <div class="word-text">weekend</div>
+                    <div class="translation-text">周末</div>
+                </div>
+            </div>
+            
+            <div class="sentence-section">
+                <h4 class="sentence-title">句子扩展：</h4>
+                <div class="space-y-4">
+                    <div class="sentence-item">
+                        <div class="sentence-english">I have English class on Monday. It's my favorite subject.</div>
+                        <div class="sentence-chinese">（我星期一有英语课。这是我最喜欢的科目。）</div>
+                    </div>
+                    <div class="sentence-item">
+                        <div class="sentence-english">What do you usually do on weekends? I often go to the park with my family.</div>
+                        <div class="sentence-chinese">（你周末通常做什么？我经常和家人去公园。）</div>
+                    </div>
+                    <div class="sentence-item">
+                        <div class="sentence-english">On Wednesday afternoon, we have a PE class. We can play basketball.</div>
+                        <div class="sentence-chinese">（星期三下午，我们有体育课。我们可以打篮球。）</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 食物与饮料类 -->
+        <div id="food" class="category-container scroll-mt-24">
+            <div class="category-header">
+                <div class="category-icon">
+                    <i class="fa fa-cutlery"></i>
+                </div>
+                <h3 class="category-title">食物与饮料类</h3>
+            </div>
+            
+            <div class="word-grid">
+                <div class="word-card" data-word="sandwich">
+                    <div class="word-text">sandwich</div>
+                    <div class="translation-text">三明治</div>
+                </div>
+                <div class="word-card" data-word="salad">
+                    <div class="word-text">salad</div>
+                    <div class="translation-text">沙拉</div>
+                </div>
+                <div class="word-card" data-word="hamburger">
+                    <div class="word-text">hamburger</div>
+                    <div class="translation-text">汉堡包</div>
+                </div>
+                <div class="word-card" data-word="ice-cream">
+                    <div class="word-text">ice-cream</div>
+                    <div class="translation-text">冰淇淋</div>
+                </div>
+                <div class="word-card" data-word="tea">
+                    <div class="word-text">tea</div>
+                    <div class="translation-text">茶</div>
+                </div>
+                <div class="word-card" data-word="fresh">
+                    <div class="word-text">fresh</div>
+                    <div class="translation-text">新鲜的</div>
+                </div>
+                <div class="word-card" data-word="healthy">
+                    <div class="word-text">healthy</div>
+                    <div class="translation-text">健康的</div>
+                </div>
+                <div class="word-card" data-word="delicious">
+                    <div class="word-text">delicious</div>
+                    <div class="translation-text">美味的</div>
+                </div>
+                <div class="word-card" data-word="hot">
+                    <div class="word-text">hot</div>
+                    <div class="translation-text">辣的</div>
+                </div>
+                <div class="word-card" data-word="sweet">
+                    <div class="word-text">sweet</div>
+                    <div class="translation-text">甜的</div>
+                </div>
+                <div class="word-card" data-word="drink">
+                    <div class="word-text">drink</div>
+                    <div class="translation-text">喝</div>
+                </div>
+                <div class="word-card" data-word="thirsty">
+                    <div class="word-text">thirsty</div>
+                    <div class="translation-text">口渴的</div>
+                </div>
+                <div class="word-card" data-word="favourite">
+                    <div class="word-text">favourite</div>
+                    <div class="translation-text">最喜欢的</div>
+                </div>
+                <div class="word-card" data-word="food">
+                    <div class="word-text">food</div>
+                    <div class="translation-text">食物</div>
+                </div>
+                <div class="word-card" data-word="onion">
+                    <div class="word-text">onion</div>
+                    <div class="translation-text">洋葱</div>
+                </div>
+            </div>
+            
+            <div class="sentence-section">
+                <h4 class="sentence-title">句子扩展：</h4>
+                <div class="space-y-4">
+                    <div class="sentence-item">
+                        <div class="sentence-english">I like to eat a sandwich for breakfast. It's quick and delicious.</div>
+                        <div class="sentence-chinese">（我喜欢早餐吃三明治。它又快又美味。）</div>
+                    </div>
+                    <div class="sentence-item">
+                        <div class="sentence-english">Salad is very healthy. It has a lot of fresh vegetables.</div>
+                        <div class="sentence-chinese">（沙拉很健康。它有很多新鲜蔬菜。）</div>
+                    </div>
+                    <div class="sentence-item">
+                        <div class="sentence-english">I'm thirsty. I want to drink a glass of water.</div>
+                        <div class="sentence-chinese">（我渴了。我想喝一杯水。）</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 能力与活动类 -->
+        <div id="abilities" class="category-container scroll-mt-24">
+            <div class="category-header">
+                <div class="category-icon">
+                    <i class="fa fa-gamepad"></i>
+                </div>
+                <h3 class="category-title">能力与活动类</h3>
+            </div>
+            
+            <div class="word-grid">
+                <div class="word-card" data-word="sing">
+                    <div class="word-text">sing</div>
+                    <div class="translation-text">唱歌</div>
+                </div>
+                <div class="word-card" data-word="song">
+                    <div class="word-text">song</div>
+                    <div class="translation-text">歌曲</div>
+                </div>
+                <div class="word-card" data-word="dance">
+                    <div class="word-text">dance</div>
+                    <div class="translation-text">跳舞</div>
+                </div>
+                <div class="word-card" data-word="draw">
+                    <div class="word-text">draw</div>
+                    <div class="translation-text">画画</div>
+                </div>
+                <div class="word-card" data-word="cartoon">
+                    <div class="word-text">cartoon</div>
+                    <div class="translation-text">漫画</div>
+                </div>
+                <div class="word-card" data-word="cook">
+                    <div class="word-text">cook</div>
+                    <div class="translation-text">烹饪</div>
+                </div>
+                <div class="word-card" data-word="swim">
+                    <div class="word-text">swim</div>
+                    <div class="translation-text">游泳</div>
+                </div>
+                <div class="word-card" data-word="play the pipa">
+                    <div class="word-text">play the pipa</div>
+                    <div class="translation-text">弹琵琶</div>
+                </div>
+                <div class="word-card" data-word="do kung fu">
+                    <div class="word-text">do kung fu</div>
+                    <div class="translation-text">练武术</div>
+                </div>
+                <div class="word-card" data-word="party">
+                    <div class="word-text">party</div>
+                    <div class="translation-text">派对</div>
+                </div>
+                <div class="word-card" data-word="wonderful">
+                    <div class="word-text">wonderful</div>
+                    <div class="translation-text">精彩的</div>
+                </div>
+                <div class="word-card" data-word="learn">
+                    <div class="word-text">learn</div>
+                    <div class="translation-text">学习</div>
+                </div>
+                <div class="word-card" data-word="any">
+                    <div class="word-text">any</div>
+                    <div class="translation-text">任何的</div>
+                </div>
+            </div>
+            
+            <div class="sentence-section">
+                <h4 class="sentence-title">句子扩展：</h4>
+                <div class="space-y-4">
+                    <div class="sentence-item">
+                        <div class="sentence-english">I can sing English songs. I will sing at the school party.</div>
+                        <div class="sentence-chinese">（我会唱英文歌。我将在学校派对上唱歌。）</div>
+                    </div>
+                    <div class="sentence-item">
+                        <div class="sentence-english">She likes to dance. She takes dance classes every week.</div>
+                        <div class="sentence-chinese">（她喜欢跳舞。她每周都上舞蹈课。）</div>
+                    </div>
+                    <div class="sentence-item">
+                        <div class="sentence-english">He can draw beautiful cartoons. He wants to be a cartoonist.</div>
+                        <div class="sentence-chinese">（他能画漂亮的漫画。他想成为一名漫画家。）</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 家居物品类 -->
+        <div id="household" class="category-container scroll-mt-24">
+            <div class="category-header">
+                <div class="category-icon">
+                    <i class="fa fa-home"></i>
+                </div>
+                <h3 class="category-title">家居物品类</h3>
+            </div>
+            
+            <div class="word-grid">
+                <div class="word-card" data-word="clock">
+                    <div class="word-text">clock</div>
+                    <div class="translation-text">时钟</div>
+                </div>
+                <div class="word-card" data-word="plant">
+                    <div class="word-text">plant</div>
+                    <div class="translation-text">植物</div>
+                </div>
+                <div class="word-card" data-word="bottle">
+                    <div class="word-text">bottle</div>
+                    <div class="translation-text">瓶子</div>
+                </div>
+                <div class="word-card" data-word="water bottle">
+                    <div class="word-text">water bottle</div>
+                    <div class="translation-text">水瓶</div>
+                </div>
+                <div class="word-card" data-word="bike">
+                    <div class="word-text">bike</div>
+                    <div class="translation-text">自行车</div>
+                </div>
+                <div class="word-card" data-word="photo">
+                    <div class="word-text">photo</div>
+                    <div class="translation-text">照片</div>
+                </div>
+                <div class="word-card" data-word="front">
+                    <div class="word-text">front</div>
+                    <div class="translation-text">前面</div>
+                </div>
+                <div class="word-card" data-word="in front of">
+                    <div class="word-text">in front of</div>
+                    <div class="translation-text">在…… 前面</div>
+                </div>
+                <div class="word-card" data-word="between">
+                    <div class="word-text">between</div>
+                    <div class="translation-text">在…… 中间</div>
+                </div>
+                <div class="word-card" data-word="above">
+                    <div class="word-text">above</div>
+                    <div class="translation-text">在…… 上面</div>
+                </div>
+                <div class="word-card" data-word="beside">
+                    <div class="word-text">beside</div>
+                    <div class="translation-text">在…… 旁边</div>
+                </div>
+                <div class="word-card" data-word="behind">
+                    <div class="word-text">behind</div>
+                    <div class="translation-text">在…… 后面</div>
+                </div>
+                <div class="word-card" data-word="there">
+                    <div class="word-text">there</div>
+                    <div class="translation-text">表示存在或发生</div>
+                </div>
+            </div>
+            
+            <div class="sentence-section">
+                <h4 class="sentence-title">句子扩展：</h4>
+                <div class="space-y-4">
+                    <div class="sentence-item">
+                        <div class="sentence-english">There is a clock on the wall. It tells us the time.</div>
+                        <div class="sentence-chinese">（墙上有一个时钟。它告诉我们时间。）</div>
+                    </div>
+                    <div class="sentence-item">
+                        <div class="sentence-english">I have a plant in my room. It makes the room look nice.</div>
+                        <div class="sentence-chinese">（我房间里有一盆植物。它让房间看起来很漂亮。）</div>
+                    </div>
+                    <div class="sentence-item">
+                        <div class="sentence-english">My bike is in front of the house. I ride it to school every day.</div>
+                        <div class="sentence-chinese">（我的自行车在房子前面。我每天骑自行车上学。）</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 季节与天气类 -->
+        <div id="seasons" class="category-container scroll-mt-24">
+            <div class="category-header">
+                <div class="category-icon">
+                    <i class="fa fa-sun-o"></i>
+                </div>
+                <h3 class="category-title">季节与天气类</h3>
+            </div>
+            
+            <div class="word-grid">
+                <div class="word-card" data-word="spring">
+                    <div class="word-text">spring</div>
+                    <div class="translation-text">春天</div>
+                </div>
+                <div class="word-card" data-word="summer">
+                    <div class="word-text">summer</div>
+                    <div class="translation-text">夏天</div>
+                </div>
+                <div class="word-card" data-word="autumn">
+                    <div class="word-text">autumn</div>
+                    <div class="translation-text">秋天</div>
+                </div>
+                <div class="word-card" data-word="winter">
+                    <div class="word-text">winter</div>
+                    <div class="translation-text">冬天</div>
+                </div>
+                <div class="word-card" data-word="warm">
+                    <div class="word-text">warm</div>
+                    <div class="translation-text">温暖的</div>
+                </div>
+                <div class="word-card" data-word="hot">
+                    <div class="word-text">hot</div>
+                    <div class="translation-text">热的</div>
+                </div>
+                <div class="word-card" data-word="cool">
+                    <div class="word-text">cool</div>
+                    <div class="translation-text">凉爽的</div>
+                </div>
+                <div class="word-card" data-word="cold">
+                    <div class="word-text">cold</div>
+                    <div class="translation-text">冷的</div>
+                </div>
+                <div class="word-card" data-word="rainy">
+                    <div class="word-text">rainy</div>
+                    <div class="translation-text">下雨的</div>
+                </div>
+                <div class="word-card" data-word="sunny">
+                    <div class="word-text">sunny</div>
+                    <div class="translation-text">晴朗的</div>
+                </div>
+                <div class="word-card" data-word="windy">
+                    <div class="word-text">windy</div>
+                    <div class="translation-text">有风的</div>
+                </div>
+                <div class="word-card" data-word="snowy">
+                    <div class="word-text">snowy</div>
+                    <div class="translation-text">下雪的</div>
+                </div>
+            </div>
+            
+            <div class="sentence-section">
+                <h4 class="sentence-title">句子扩展：</h4>
+                <div class="space-y-4">
+                    <div class="sentence-item">
+                        <div class="sentence-english">Spring is my favorite season. It's warm and the flowers are blooming.</div>
+                        <div class="sentence-chinese">（春天是我最喜欢的季节。天气温暖，花儿正在盛开。）</div>
+                    </div>
+                    <div class="sentence-item">
+                        <div class="sentence-english">In summer, it's very hot. I often go swimming in the pool.</div>
+                        <div class="sentence-chinese">（夏天，天气很热。我经常在游泳池里游泳。）</div>
+                    </div>
+                    <div class="sentence-item">
+                        <div class="sentence-english">It's a sunny day today. Let's go for a picnic.</div>
+                        <div class="sentence-chinese">（今天是个晴天。我们去野餐吧。）</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 职业与梦想类 -->
+        <div id="careers" class="category-container scroll-mt-24">
+            <div class="category-header">
+                <div class="category-icon">
+                    <i class="fa fa-briefcase"></i>
+                </div>
+                <h3 class="category-title">职业与梦想类</h3>
+            </div>
+            
+            <div class="word-grid">
+                <div class="word-card" data-word="teacher">
+                    <div class="word-text">teacher</div>
+                    <div class="translation-text">老师</div>
+                </div>
+                <div class="word-card" data-word="doctor">
+                    <div class="word-text">doctor</div>
+                    <div class="translation-text">医生</div>
+                </div>
+                <div class="word-card" data-word="nurse">
+                    <div class="word-text">nurse</div>
+                    <div class="translation-text">护士</div>
+                </div>
+                <div class="word-card" data-word="driver">
+                    <div class="word-text">driver</div>
+                    <div class="translation-text">司机</div>
+                </div>
+                <div class="word-card" data-word="policeman">
+                    <div class="word-text">policeman</div>
+                    <div class="translation-text">警察</div>
+                </div>
+                <div class="word-card" data-word="postman">
+                    <div class="word-text">postman</div>
+                    <div class="translation-text">邮递员</div>
+                </div>
+                <div class="word-card" data-word="singer">
+                    <div class="word-text">singer</div>
+                    <div class="translation-text">歌手</div>
+                </div>
+                <div class="word-card" data-word="dancer">
+                    <div class="word-text">dancer</div>
+                    <div class="translation-text">舞者</div>
+                </div>
+                <div class="word-card" data-word="writer">
+                    <div class="word-text">writer</div>
+                    <div class="translation-text">作家</div>
+                </div>
+                <div class="word-card" data-word="artist">
+                    <div class="word-text">artist</div>
+                    <div class="translation-text">艺术家</div>
+                </div>
+                <div class="word-card" data-word="want">
+                    <div class="word-text">want</div>
+                    <div class="translation-text">想要</div>
+                </div>
+                <div class="word-card" data-word="be">
+                    <div class="word-text">be</div>
+                    <div class="translation-text">成为</div>
+                </div>
+                <div class="word-card" data-word="future">
+                    <div class="word-text">future</div>
+                    <div class="translation-text">未来</div>
+                </div>
+            </div>
+            
+            <div class="sentence-section">
+                <h4 class="sentence-title">句子扩展：</h4>
+                <div class="space-y-4">
+                    <div class="sentence-item">
+                        <div class="sentence-english">My mother is a teacher. She teaches English. She loves her job.</div>
+                        <div class="sentence-chinese">（我妈妈是一名老师。她教英语。她热爱她的工作。）</div>
+                    </div>
+                    <div class="sentence-item">
+                        <div class="sentence-english">I want to be a doctor in the future. I want to help sick people.</div>
+                        <div class="sentence-chinese">（我未来想成为一名医生。我想帮助病人。）</div>
+                    </div>
+                    <div class="sentence-item">
+                        <div class="sentence-english">The singer can sing very well. He has many fans.</div>
+                        <div class="sentence-chinese">（这位歌手唱歌很好听。他有很多粉丝。）</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 学科类 -->
+        <div id="subjects" class="category-container scroll-mt-24">
+            <div class="category-header">
+                <div class="category-icon">
+                    <i class="fa fa-book"></i>
+                </div>
+                <h3 class="category-title">学科类</h3>
+            </div>
+            
+            <div class="word-grid">
+                <div class="word-card" data-word="English">
+                    <div class="word-text">English</div>
+                    <div class="translation-text">英语</div>
+                </div>
+                <div class="word-card" data-word="math">
+                    <div class="word-text">math</div>
+                    <div class="translation-text">数学</div>
+                </div>
+                <div class="word-card" data-word="Chinese">
+                    <div class="word-text">Chinese</div>
+                    <div class="translation-text">语文</div>
+                </div>
+                <div class="word-card" data-word="science">
+                    <div class="word-text">science</div>
+                    <div class="translation-text">科学</div>
+                </div>
+                <div class="word-card" data-word="PE">
+                    <div class="word-text">PE</div>
+                    <div class="translation-text">体育</div>
+                </div>
+                <div class="word-card" data-word="art">
+                    <div class="word-text">art</div>
+                    <div class="translation-text">美术</div>
+                </div>
+                <div class="word-card" data-word="music">
+                    <div class="word-text">music</div>
+                    <div class="translation-text">音乐</div>
+                </div>
+            </div>
+            
+            <div class="sentence-section">
+                <h4 class="sentence-title">句子扩展：</h4>
+                <div class="space-y-4">
+                    <div class="sentence-item">
+                        <div class="sentence-english">I like English because I can learn new words and songs.</div>
+                        <div class="sentence-chinese">（我喜欢英语，因为我可以学习新单词和歌曲。）</div>
+                    </div>
+                    <div class="sentence-item">
+                        <div class="sentence-english">Math is difficult but interesting. I like to solve math problems.</div>
+                        <div class="sentence-chinese">（数学很难但很有趣。我喜欢解决数学难题。）</div>
+                    </div>
+                    <div class="sentence-item">
+                        <div class="sentence-english">In PE class, we can play different sports.</div>
+                        <div class="sentence-chinese">（在体育课上，我们可以进行不同的体育运动。）</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 句子扩展练习 -->
+        <div id="exercises" class="exercise-container scroll-mt-24">
+            <h3 class="exercise-title">二、句子扩展练习</h3>
+            
+            <div class="exercise-type">
+                <h4 class="exercise-type-title">复合句扩展</h4>
+                <div class="space-y-6 pl-2">
+                    <div>
+                        <p class="font-medium mb-2">原句：I like reading books.（我喜欢读书。）</p>
+                        <p class="bg-light p-3 rounded border-l-4 border-primary">扩展：I like reading books because I can learn a lot of interesting things from them.（我喜欢读书，因为我可以从书中学到很多有趣的东西。）</p>
+                    </div>
+                    
+                    <div>
+                        <p class="font-medium mb-2">原句：She is good at dancing.（她擅长跳舞。）</p>
+                        <p class="bg-light p-3 rounded border-l-4 border-primary">扩展：She is good at dancing and she often takes part in dancing competitions.（她擅长跳舞，并且经常参加舞蹈比赛。）</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="exercise-type">
+                <h4 class="exercise-type-title">比较级与最高级句子扩展</h4>
+                <div class="space-y-6 pl-2">
+                    <div>
+                        <p class="font-medium mb-2">原句：The cat is small.（这只猫很小。）</p>
+                        <p class="bg-light p-3 rounded border-l-4 border-primary">扩展：The cat is smaller than the dog. But it is the smallest animal in my house.（这只猫比狗小。但它是我家里最小的动物。）</p>
+                    </div>
+                    
+                    <div>
+                        <p class="font-medium mb-2">原句：He is tall.（他很高。）</p>
+                        <p class="bg-light p-3 rounded border-l-4 border-primary">扩展：He is taller than his brother. And he is the tallest boy in his class.（他比他哥哥高。并且他是他班上最高的男孩。）</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="exercise-type">
+                <h4 class="exercise-type-title">一般将来时句子扩展</h4>
+                <div class="space-y-6 pl-2">
+                    <div>
+                        <p class="font-medium mb-2">原句：I will go to the park.（我将去公园。）</p>
+                        <p class="bg-light p-3 rounded border-l-4 border-primary">扩展：I will go to the park with my friends tomorrow. We will fly a kite and have a picnic there.（我明天将和我的朋友们去公园。我们将在那里放风筝和野餐。）</p>
+                    </div>
+                    
+                    <div>
+                        <p class="font-medium mb-2">原句：She will buy a new book.（她将买一本新书。）</p>
+                        <p class="bg-light p-3 rounded border-l-4 border-primary">扩展：She will buy a new interesting storybook this weekend. She can't wait to read it.（她这个周末将买一本新的有趣的故事书。她迫不及待地想读它。）</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-dark text-white py-6 mt-12">
+        <div class="container mx-auto px-4 text-center">
+            <p>五年级英语单词及句子扩展 &copy; 2025</p>
+            <p class="mt-2 text-sm opacity-70">开发者:han.123工作室</p>
+        </div>
+    </footer>
+
+    <script>
+        // 单词卡片点击标记已掌握功能
+        document.addEventListener('DOMContentLoaded', () => {
+            const wordCards = document.querySelectorAll('.word-card');
+            const totalWords = wordCards.length;
+            const progressFill = document.getElementById('progress-fill');
+            const progressPercentage = document.getElementById('progress-percentage');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            // 初始化已掌握的单词
+            let masteredWords = localStorage.getItem('masteredWords') ? 
+                JSON.parse(localStorage.getItem('masteredWords')) : [];
+            
+            // 更新进度
+            function updateProgress() {
+                const percentage = Math.round((masteredWords.length / totalWords) * 100);
+                progressFill.style.width = `${percentage}%`;
+                progressPercentage.textContent = `${percentage}%`;
+            }
+            
+            // 加载已掌握的单词标记
+            wordCards.forEach(card => {
+                const word = card.getAttribute('data-word');
+                if (masteredWords.includes(word)) {
+                    card.classList.add('mastered');
+                }
+            });
+            
+            // 点击单词卡片标记/取消标记
+            wordCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    const word = card.getAttribute('data-word');
+                    const index = masteredWords.indexOf(word);
+                    
+                    if (index === -1) {
+                        // 标记为已掌握
+                        masteredWords.push(word);
+                        card.classList.add('mastered');
+                    } else {
+                        // 取消标记
+                        masteredWords.splice(index, 1);
+                        card.classList.remove('mastered');
+                    }
+                    
+                    // 保存到本地存储
+                    localStorage.setItem('masteredWords', JSON.stringify(masteredWords));
+                    // 更新进度
+                    updateProgress();
+                });
+            });
+            
+            // 平滑滚动
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    // 更新导航激活状态
+                    navLinks.forEach(link => link.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // 滚动到目标位置
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+            
+            // 滚动时更新导航激活状态
+            window.addEventListener('scroll', () => {
+                const scrollPosition = window.scrollY;
+                
+                document.querySelectorAll('main > div[id]').forEach(section => {
+                    const sectionTop = section.offsetTop - 100;
+                    const sectionBottom = sectionTop + section.offsetHeight;
+                    const sectionId = section.getAttribute('id');
+                    
+                    if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+                        navLinks.forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href') === `#${sectionId}`) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            });
+            
+            // 初始化进度
+            updateProgress();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>一年级英语单词及句子扩展</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+        :root {
+            --primary: #4B2BE3;
+            --secondary: #7C5DFA;
+            --light: #F8F9FC;
+            --dark: #1E2135;
+        }
+        * {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .section-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .section-title {
+            font-size: 2.25rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        .section-subtitle {
+            font-size: 1.125rem;
+            color: var(--dark);
+            opacity: 0.8;
+        }
+        .category {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+        .category:hover {
+            transform: translateY(-5px);
+        }
+        .category-title {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: var(--dark);
+            margin-bottom: 25px;
+        }
+        .category-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+        .word-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        .word-item {
+            background: var(--light);
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        .word-item:hover {
+            background: var(--secondary);
+            color: white;
+        }
+        .word {
+            font-size: 1.125rem;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+        .translation {
+            font-size: 0.875rem;
+            color: var(--dark);
+            opacity: 0.7;
+        }
+        .sentence-list {
+            margin-top: 30px;
+            padding-left: 20px;
+            border-left: 3px solid var(--secondary);
+        }
+        .sentence-item {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        .sentence-item::before {
+            content: "✦";
+            color: var(--secondary);
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header class="py-12 bg-gradient-to-r from-[#4B2BE3] to-[#7C5DFA] text-white">
+        <div class="container">
+            <div class="section-header">
+                <h1 class="section-title">一年级英语单词及句子扩展</h1>
+                <p class="section-subtitle">基础单词分类学习 + 实用句子扩展练习</p>
+            </div>
+        </div>
+    </header>
+
+    <main class="py-12">
+        <div class="container">
+            <!-- 日常问候类 -->
+            <div class="category">
+                <div class="category-title">
+                    <div class="category-icon"><i class="fa fa-smile-o"></i></div>
+                    日常问候类
+                </div>
+                
+                <div class="word-list">
+                    <div class="word-item">
+                        <div class="word">hello</div>
+                        <div class="translation">你好</div>
+                    </div>
+                    <div class="word-item">
+                        <div class="word">hi</div>
+                        <div class="translation">嗨</div>
+                    </div>
+                    <div class="word-item">
+                        <div class="word">goodbye</div>
+                        <div class="translation">再见</div>
+                    </div>
+                    <div class="word-item">
+                        <div class="word">bye-bye</div>
+                        <div class="translation">拜拜</div>
+                    </div>
+                    <div class="word-item">
+                        <div class="word">see you</div>
+                        <div class="translation">再见</div>
+                    </div>
+                </div>
+                
+                <div class="sentence-list">
+                    <p class="sentence-item">Hello! How are you? <span class="translation">(你好！你怎么样？)</span></p>
+                    <p class="sentence-item">Hi! I'm happy today. <span class="translation">(嗨！我今天很开心。)</span></p>
+                    <p class="sentence-item">Goodbye! Have a nice day. <span class="translation">(再见！祝你有美好的一天。)</span></p>
+                </div>
+            </div>
+
+            <!-- 人物称呼类 -->
+            <div class="category">
+                <div class="category-title">
+                    <div class="category-icon"><i class="fa fa-users"></i></div>
+                    人物称呼类
+                </div>
+                
+                <div class="word-list">
+                    <div class="word-item">
+                        <div class="word">I</div>
+                        <div class="translation">我</div>
+                    </div>
+                    <div class="word-item">
+                        <div class="word">you</div>
+                        <div class="translation">你；你们</div>
+                    </div>
+                    <div class="word-item">
+                        <div class="word">he</div>
+                        <div class="translation">他</div>
+                    </div>
+                    <div class="word-item">
+                        <div class="word">she</div>
+                        <div class="translation">她</div>
+                    </div>
+                    <div class="word-item">
+                        <div class="word">name</div>
+                        <div class="translation">名字</div>
+                    </div>
+                </div>
+                
+                <div class="sentence-list">
+                    <p class="sentence-item">I'm Tom. What's your name? <span class="translation">(我是汤姆。你叫什么名字？)</span></p>
+                    <p class="sentence-item">You are my good friend. <span class="translation">(你是我的好朋友。)</span></p>
+                    <p class="sentence-item">She has long hair. <span class="translation">(她有长长的头发。)</span></p>
+                </div>
+            </div>
+
+            <!-- 学习用品类 -->
+            <div class="category">
+                <div class="category-title">
+                    <div class="category-icon"><i class="fa fa-pencil"></i></div>
+                    学习用品类
+                </div>
+                
+                <div class="word-list">
+                    <div class="word-item">
+                        <div class="word">book</div>
+                        <div class="translation">书</div>
+                    </div>
+                    <div class="word-item">
+                        <div class="word">ruler</div>
+                        <div class="translation">尺子</div>
+                    </div>
+                    <div class="word-item">
+                        <div class="word">pencil</div>
+                        <div class="translation">铅笔</div>
+                    </div>
+                    <div class="word-item">
+                        <div class="word">eraser</div>
+                        <div class="translation">橡皮</div>
+                    </div>
+                    <div class="word-item">
+                        <div class="word">crayon</div>
+                        <div class="translation">蜡笔</div>
+                    </div>
+                </div>
+                
+                <div class="sentence-list">
+                    <p class="sentence-item">I have a new book. It's interesting. <span class="translation">(我有一本新书。它很有趣。)</span></p>
+                    <p class="sentence-item">Give me a ruler, please. <span class="translation">(请给我一把尺子。)</span></p>
+                    <p class="sentence-item">This is my crayon. It's red. <span class="translation">(这是我的蜡笔。它是红色的。)</span></p>
+                </div>
+            </div>
+
+            <!-- 身体部位类 -->
+            <div class="category">
+                <div class="category-title">
+                    <div class="category-icon"><i class="fa fa-body"></i></div>
+                    身体部位类
+                </div>
+                
+                <div class="word-list">
+                    <div class="word-item">
+                        <div class="word">head</div>
+                        <div class="translation">头</div>
+                    </div>
+                    <div class="word-item">
+                        <div class="word">hair</div>
+                        <div class="translation">头发</div>
+                    </div>
+                    <div class="word-item">
+                        <div class="word">eye</div>
+                        <div class="translation">眼睛</div>
+                    </div>
+                    <div class="word-item">
+                        <div class="word">hand</div>
+                        <div class="translation">手</div>
+                    </div>
+                    <div class="word-item">
+                        <div class="word">foot</div>
+                        <div class="translation">脚</div>
+                    </div>
+                </div>
+                
+                <div class="sentence-list">
+                    <p class="sentence-item">Touch your head. <span class="translation">(摸摸你的头。)</span></p>
+                    <p class="sentence-item">My hair is black. <span class="translation">(我的头发是黑色的。)</span></p>
+                    <p class="sentence-item">Wash your hands before eating. <span class="translation">(吃东西前洗手。)</span></p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-dark text-white py-6 mt-12">
+        <div class="container mx-auto px-4 text-center">
+            <p>二年级英语单词表 &copy; 2025</p>
+            <p class="mt-2 text-sm opacity-70">开发者:han.123工作室</p>
+        </div>
+    </footer>
+
+    <script>
+        // 添加简单的交互效果
+        document.addEventListener('DOMContentLoaded', () => {
+            // 为每个单词卡片添加点击效果
+            const cards = document.querySelectorAll('.word-card');
+            cards.forEach(card => {
+                card.addEventListener('click', () => {
+                    card.classList.toggle('border-2');
+                    card.classList.toggle('border-primary');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
